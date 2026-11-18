@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Andika Maulana</title>
+<meta name="description" content="Andika Maulana — developer dari Jawa Tengah. Computer vision, machine learning, web & mobile. Commit. Push. Pray.">
+<meta property="og:title" content="Andika Maulana">
+<meta property="og:description" content="Computer vision, machine learning, web & mobile. Commit. Push. Pray.">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/31788726?v=4">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0d1117">
+<link rel="icon" href="https://avatars.githubusercontent.com/u/31788726?v=4&s=64">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f8fa;
+    --bg-2: #ffffff;
+    --card: #ffffff;
+    --border: #e3e6eb;
+    --text: #1b1f24;
+    --muted: #5b6470;
+    --accent: #0f9d58;
+    --accent-2: #2563eb;
+    --accent-soft: rgba(15, 157, 88, .10);
+    --term-bg: #0d1117;
+    --term-text: #c9d1d9;
+    --shadow: 0 1px 2px rgba(16,24,40,.04), 0 8px 24px rgba(16,24,40,.06);
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0b0e13;
+      --bg-2: #0f141b;
+      --card: #121821;
+      --border: #222b36;
+      --text: #e6edf3;
+      --muted: #8b96a3;
+      --accent: #3fd68a;
+      --accent-2: #6ea8ff;
+      --accent-soft: rgba(63, 214, 138, .12);
+      --term-bg: #070a0e;
+      --term-text: #c9d1d9;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.35);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0b0e13;
+    --bg-2: #0f141b;
+    --card: #121821;
+    --border: #222b36;
+    --text: #e6edf3;
+    --muted: #8b96a3;
+    --accent: #3fd68a;
+    --accent-2: #6ea8ff;
+    --accent-soft: rgba(63, 214, 138, .12);
+    --term-bg: #070a0e;
+    --term-text: #c9d1d9;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.35);
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.6 Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  a { color: inherit; }
+  .mono { font-family: "JetBrains Mono", ui-monospace, Consolas, monospace; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+
+  /* nav */
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    background: color-mix(in srgb, var(--bg) 82%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; gap: 12px; }
+  .brand { font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+  .brand span { color: var(--accent); }
+  .links { display: flex; gap: 4px; align-items: center; }
+  .links a {
+    text-decoration: none; color: var(--muted); font-size: 14px; font-weight: 500;
+    padding: 6px 10px; border-radius: 8px;
+  }
+  .links a:hover { color: var(--text); background: var(--accent-soft); }
+  .icon-btn {
+    border: 1px solid var(--border); background: var(--card); color: var(--text);
+    width: 36px; height: 36px; border-radius: 10px; cursor: pointer;
+    display: inline-grid; place-items: center;
+  }
+  .icon-btn:hover { border-color: var(--accent); }
+  @media (max-width: 640px) { .links a.hide-sm { display: none; } }
+
+  /* hero */
+  .hero { padding: 72px 0 56px; position: relative; }
+  .hero::before {
+    content: ""; position: absolute; inset: 0; z-index: -1;
+    background-image: radial-gradient(var(--border) 1px, transparent 1px);
+    background-size: 22px 22px;
+    mask-image: radial-gradient(ellipse at 30% 30%, #000 30%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse at 30% 30%, #000 30%, transparent 75%);
+  }
+  .hero-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; align-items: center; }
+  @media (max-width: 860px) { .hero-grid { grid-template-columns: 1fr; gap: 32px; } .hero { padding-top: 40px; } }
+  .avatar-row { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+  .avatar {
+    width: 64px; height: 64px; border-radius: 50%;
+    border: 2px solid var(--accent); padding: 3px; background: var(--card);
+  }
+  .status {
+    display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted);
+    border: 1px solid var(--border); background: var(--card); padding: 4px 12px; border-radius: 999px;
+  }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 0 var(--accent); animation: pulse 2s infinite; }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 60%, transparent); } 100% { box-shadow: 0 0 0 10px transparent; } }
+  h1 { font-size: clamp(36px, 6vw, 56px); line-height: 1.08; margin: 0 0 16px; letter-spacing: -0.03em; font-weight: 800; }
+  h1 .grad {
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .lead { font-size: 18px; color: var(--muted); max-width: 560px; margin: 0 0 28px; }
+  .cta { display: flex; flex-wrap: wrap; gap: 10px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
+    padding: 11px 18px; border-radius: 10px; font-weight: 600; font-size: 15px;
+    border: 1px solid var(--border); background: var(--card); transition: transform .15s, border-color .15s;
+  }
+  .btn:hover { transform: translateY(-2px); border-color: var(--accent); }
+  .btn.primary { background: var(--text); color: var(--bg); border-color: var(--text); }
+  .meta { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 28px; color: var(--muted); font-size: 14px; }
+  .meta span { display: inline-flex; align-items: center; gap: 6px; }
+
+  /* terminal */
+  .term {
+    background: var(--term-bg); color: var(--term-text); border-radius: 14px;
+    border: 1px solid #1f2731; box-shadow: var(--shadow); overflow: hidden; min-width: 0;
+  }
+  .term-bar { display: flex; align-items: center; gap: 7px; padding: 12px 14px; border-bottom: 1px solid #1f2731; }
+  .term-bar i { width: 11px; height: 11px; border-radius: 50%; display: block; }
+  .term-bar i:nth-child(1) { background: #ff5f57; } .term-bar i:nth-child(2) { background: #febc2e; } .term-bar i:nth-child(3) { background: #28c840; }
+  .term-bar small { margin-left: 8px; color: #6e7681; font-size: 12px; }
+  .term pre { margin: 0; padding: 18px; font-size: 13.5px; line-height: 1.75; white-space: pre-wrap; word-break: break-word; min-height: 280px; }
+  .t-p { color: #3fd68a; } .t-c { color: #6ea8ff; } .t-s { color: #f2cc60; } .t-m { color: #6e7681; } .t-r { color: #ff7b72; }
+  .cursor { display: inline-block; width: 8px; height: 1.1em; background: #3fd68a; vertical-align: -2px; animation: blink 1s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* sections */
+  section { padding: 56px 0; }
+  .sec-head { display: flex; align-items: end; justify-content: space-between; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; }
+  .eyebrow { font-size: 13px; color: var(--accent); font-weight: 600; letter-spacing: .02em; margin: 0 0 6px; }
+  h2 { font-size: clamp(26px, 4vw, 34px); margin: 0; letter-spacing: -0.02em; }
+  .sec-sub { color: var(--muted); margin: 8px 0 0; max-width: 620px; }
+
+  /* stats */
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  @media (max-width: 720px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+  .stat { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 18px; }
+  .stat b { display: block; font-size: 30px; font-weight: 800; letter-spacing: -0.02em; }
+  .stat span { color: var(--muted); font-size: 14px; }
+
+  /* focus */
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  @media (max-width: 860px) { .grid-3 { grid-template-columns: 1fr; } }
+  .card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 22px;
+    transition: transform .2s, border-color .2s, box-shadow .2s; min-width: 0;
+  }
+  .card:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--accent) 50%, var(--border)); box-shadow: var(--shadow); }
+  .card-ico {
+    width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center;
+    background: var(--accent-soft); color: var(--accent); margin-bottom: 14px;
+  }
+  .card h3 { margin: 0 0 6px; font-size: 18px; }
+  .card p { margin: 0; color: var(--muted); font-size: 15px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+  .tag { font-size: 12px; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--border); color: var(--muted); font-family: "JetBrains Mono", monospace; }
+
+  /* projects */
+  .proj-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  @media (max-width: 720px) { .proj-grid { grid-template-columns: 1fr; } }
+  .proj { display: flex; flex-direction: column; text-decoration: none; }
+  .proj-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .proj h3 { font-family: "JetBrains Mono", monospace; font-size: 16px; overflow-wrap: anywhere; }
+  .proj p { flex: 1; }
+  .proj-foot { display: flex; gap: 16px; align-items: center; margin-top: 16px; font-size: 13px; color: var(--muted); flex-wrap: wrap; }
+  .lang { display: inline-flex; align-items: center; gap: 6px; }
+  .lang i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+  .badge { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); white-space: nowrap; }
+  .arrow { color: var(--muted); transition: transform .2s, color .2s; flex-shrink: 0; }
+  .proj:hover .arrow { transform: translate(3px, -3px); color: var(--accent); }
+
+  /* repo list */
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+  .chip {
+    border: 1px solid var(--border); background: var(--card); color: var(--muted);
+    padding: 6px 12px; border-radius: 999px; font-size: 13px; cursor: pointer; font-family: inherit;
+  }
+  .chip:hover { color: var(--text); }
+  .chip.on { background: var(--text); color: var(--bg); border-color: var(--text); }
+  .toggle { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); cursor: pointer; margin-left: auto; }
+  .repo-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  @media (max-width: 860px) { .repo-list { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .repo-list { grid-template-columns: 1fr; } }
+  .repo { padding: 16px; border-radius: 12px; }
+  .repo h3 { font-size: 14px; }
+  .repo p { font-size: 13.5px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .repo .proj-foot { margin-top: 10px; font-size: 12px; }
+  .note { color: var(--muted); font-size: 14px; }
+
+  /* timeline */
+  .timeline { position: relative; margin: 0; padding: 0 0 0 22px; list-style: none; }
+  .timeline::before { content: ""; position: absolute; left: 6px; top: 6px; bottom: 6px; width: 2px; background: var(--border); }
+  .timeline li { position: relative; padding: 0 0 26px; }
+  .timeline li::before {
+    content: ""; position: absolute; left: -22px; top: 6px; width: 14px; height: 14px; border-radius: 50%;
+    background: var(--bg); border: 2px solid var(--accent);
+  }
+  .timeline .yr { font-family: "JetBrains Mono", monospace; font-size: 13px; color: var(--accent); font-weight: 700; }
+  .timeline h4 { margin: 2px 0 4px; font-size: 16px; }
+  .timeline p { margin: 0; color: var(--muted); font-size: 15px; }
+
+  /* contact */
+  .contact {
+    background: var(--term-bg); color: #e6edf3; border-radius: 20px; padding: 44px 28px; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .contact::after {
+    content: ""; position: absolute; inset: auto -20% -60% -20%; height: 120%;
+    background: radial-gradient(ellipse at center, rgba(63,214,138,.25), transparent 60%); pointer-events: none;
+  }
+  .contact h2 { color: #fff; }
+  .contact p { color: #9aa5b1; max-width: 520px; margin: 10px auto 24px; }
+  .contact .btn { background: #fff; color: #0d1117; border-color: #fff; position: relative; z-index: 1; }
+  footer { padding: 28px 0 40px; color: var(--muted); font-size: 14px; }
+  footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+  .reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .dot, .cursor { animation: none; }
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand mono" href="#top">~/andika<span>_</span></a>
+    <div class="links">
+      <a href="#tentang" class="hide-sm">Tentang</a>
+      <a href="#proyek">Proyek</a>
+      <a href="#repo" class="hide-sm">Repo</a>
+      <a href="#kontak">Kontak</a>
+      <button class="icon-btn" id="themeBtn" aria-label="Ganti tema" title="Ganti tema">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="avatar-row">
+        <img class="avatar" src="https://avatars.githubusercontent.com/u/31788726?v=4&s=160" alt="Foto profil Andika Maulana" width="64" height="64">
+        <span class="status"><span class="dot"></span> Terbuka untuk kolaborasi</span>
+      </div>
+      <h1>Halo, saya <span class="grad">Andika Maulana</span>.</h1>
+      <p class="lead">Developer dari Jawa Tengah yang suka membuat mesin "melihat" — computer vision, OCR, dan machine learning — lalu membungkusnya jadi aplikasi web &amp; mobile yang bisa dipakai.</p>
+      <div class="cta">
+        <a class="btn primary" href="https://github.com/andikaMaulana" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          Lihat GitHub
+        </a>
+        <a class="btn" href="#proyek">Proyek unggulan →</a>
+      </div>
+      <div class="meta">
+        <span>📍 Central Java, Indonesia</span>
+        <span class="mono">“Commit. Push. Pray.”</span>
+      </div>
+    </div>
+
+    <div class="term" aria-label="Terminal dekoratif">
+      <div class="term-bar"><i></i><i></i><i></i><small class="mono">andika@github: ~</small></div>
+      <pre class="mono" id="term"></pre>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section id="tentang">
+    <div class="wrap">
+      <div class="stats reveal">
+        <div class="stat"><b id="sRepos">34</b><span>Repo publik</span></div>
+        <div class="stat"><b id="sYears">9+</b><span>Tahun di GitHub</span></div>
+        <div class="stat"><b id="sStars">15</b><span>Bintang diterima</span></div>
+        <div class="stat"><b id="sLangs">8</b><span>Bahasa dipakai</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <p class="eyebrow mono">// apa yang saya kerjakan</p>
+          <h2>Fokus &amp; keahlian</h2>
+          <p class="sec-sub">Dari algoritma yang ditulis dari nol sampai aplikasi yang siap dipakai pengguna.</p>
+        </div>
+      </div>
+      <div class="grid-3">
+        <div class="card reveal">
+          <div class="card-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
+          <h3>Computer Vision &amp; OCR</h3>
+          <p>Deteksi wajah Viola-Jones dari nol, pengenalan plat nomor, OCR KTP, text recognition berbasis deep learning, dan YOLO/Darknet.</p>
+          <div class="tags"><span class="tag">OpenCV</span><span class="tag">Darknet</span><span class="tag">OCR</span></div>
+        </div>
+        <div class="card reveal">
+          <div class="card-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="6" r="2"/><circle cx="5" cy="18" r="2"/><circle cx="19" cy="12" r="2"/><path d="M7 6.5l10 5M7 17.5l10-5"/></svg></div>
+          <h3>Machine Learning</h3>
+          <p>Backpropagation, Perceptron, KNN, K-Means, analisis sentimen, fuzzy SAW, sampai sistem pakar forward chaining.</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">Java</span><span class="tag">NumPy</span></div>
+        </div>
+        <div class="card reveal">
+          <div class="card-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+          <h3>Web &amp; Mobile</h3>
+          <p>Sistem informasi dengan PHP/CodeIgniter &amp; MySQL, aplikasi Flutter/Kotlin, hingga game HTML5 di browser.</p>
+          <div class="tags"><span class="tag">PHP</span><span class="tag">Flutter</span><span class="tag">Kotlin</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="proyek">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <p class="eyebrow mono">// pinned</p>
+          <h2>Proyek unggulan</h2>
+          <p class="sec-sub">Beberapa proyek yang paling mewakili apa yang saya suka kerjakan.</p>
+        </div>
+      </div>
+      <div class="proj-grid" id="featured"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <p class="eyebrow mono">// git log --oneline</p>
+          <h2>Perjalanan</h2>
+        </div>
+      </div>
+      <ol class="timeline reveal">
+        <li><div class="yr">2017</div><h4>git init</h4><p>Bergabung dengan GitHub dan mulai menyimpan eksperimen pertama.</p></li>
+        <li><div class="yr">2018</div><h4>Algoritma dari nol</h4><p>KNN, K-Means, Perceptron, Backpropagation, metode Simplex, dan Fuzzy SAW — belajar dengan membangun sendiri.</p></li>
+        <li><div class="yr">2019–2020</div><h4>Mesin yang bisa melihat</h4><p>Viola-Jones, OCR plat nomor, text recognition, analisis sentimen, dan kontribusi open source pertama.</p></li>
+        <li><div class="yr">2021–2025</div><h4>Membangun produk</h4><p>Sistem informasi alumni, sistem pendukung keputusan penyakit balita — proyek paling banyak dibintangi.</p></li>
+        <li><div class="yr">2026</div><h4>HEAD → main</h4><p>Darknet, OCR KTP dengan Flutter &amp; Kotlin, eksperimen game, dan halaman ini.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="repo">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <p class="eyebrow mono">// ls ~/repos</p>
+          <h2>Semua repositori</h2>
+          <p class="sec-sub" id="repoNote">Diambil langsung dari GitHub.</p>
+        </div>
+      </div>
+      <div class="filters" id="filters"></div>
+      <div class="repo-list" id="repos"><p class="note">Memuat repositori…</p></div>
+    </div>
+  </section>
+
+  <section id="kontak">
+    <div class="wrap">
+      <div class="contact reveal">
+        <p class="eyebrow mono">// git remote add you</p>
+        <h2>Mari bikin sesuatu bersama</h2>
+        <p>Punya ide proyek, butuh bantuan computer vision, atau sekadar ingin ngobrol soal kode? Sapa saya di GitHub.</p>
+        <a class="btn" href="https://github.com/andikaMaulana" target="_blank" rel="noopener">@andikaMaulana di GitHub →</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr">2026</span> Andika Maulana</span>
+    <span class="mono">Commit. Push. Pray. 🙏</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var USER = "andikaMaulana";
+
+  // ---------- theme ----------
+  var root = document.documentElement;
+  try { var saved = localStorage.getItem("theme"); if (saved) root.setAttribute("data-theme", saved); } catch (e) {}
+  document.getElementById("themeBtn").addEventListener("click", function () {
+    var cur = root.getAttribute("data-theme") ||
+      (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    var next = cur === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem("theme", next); } catch (e) {}
+  });
+  document.getElementById("yr").textContent = new Date().getFullYear();
+  document.getElementById("sYears").textContent = (new Date().getFullYear() - 2017) + "+";
+
+  // ---------- terminal typing ----------
+  var lines = [
+    ['<span class="t-p">$</span> <span class="t-c">whoami</span>', 'andika maulana — developer, jawa tengah'],
+    ['<span class="t-p">$</span> <span class="t-c">cat</span> stack.txt', 'python · php · java · dart · kotlin · c · js'],
+    ['<span class="t-p">$</span> <span class="t-c">ls</span> interests/', 'computer-vision/  ocr/  machine-learning/  web/  mobile/'],
+    ['<span class="t-p">$</span> <span class="t-c">git</span> commit -m <span class="t-s">"ship it"</span>', '<span class="t-m">[main f9c9659] ship it</span>'],
+    ['<span class="t-p">$</span> <span class="t-c">git</span> push', '<span class="t-m">Everything up-to-date</span>'],
+    ['<span class="t-p">$</span> <span class="t-c">pray</span>', '🙏 <span class="t-p">build passed</span>']
+  ];
+  var term = document.getElementById("term");
+  var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function strip(h) { var d = document.createElement("div"); d.innerHTML = h; return d.textContent; }
+  if (reduce) {
+    term.innerHTML = lines.map(function (l) { return l[0] + "\n" + l[1]; }).join("\n") + '\n<span class="t-p">$</span> <span class="cursor"></span>';
+  } else {
+    var out = "", i = 0;
+    (function nextLine() {
+      if (i >= lines.length) { term.innerHTML = out + '<span class="t-p">$</span> <span class="cursor"></span>'; return; }
+      var cmd = lines[i][0], res = lines[i][1], plain = strip(cmd), n = 0;
+      (function type() {
+        n++;
+        // show plain text while typing, swap to colored once complete
+        term.innerHTML = out + (n >= plain.length ? cmd : escapeHtml(plain.slice(0, n))) + '<span class="cursor"></span>';
+        if (n < plain.length) return setTimeout(type, 28 + Math.random() * 40);
+        setTimeout(function () { out += cmd + "\n" + res + "\n"; i++; nextLine(); }, 380);
+      })();
+    })();
+  }
+
+  // ---------- helpers ----------
+  function escapeHtml(s) {
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+  var LANG_COLOR = {
+    Python: "#3572A5", PHP: "#4F5D95", Java: "#b07219", JavaScript: "#f1e05a", HTML: "#e34c26",
+    Dart: "#00B4AB", Kotlin: "#A97BFF", C: "#555555", "C++": "#f34b7d", Assembly: "#6E4C13"
+  };
+  function langHtml(l) {
+    if (!l) return "";
+    return '<span class="lang"><i style="background:' + (LANG_COLOR[l] || "#8b96a3") + '"></i>' + escapeHtml(l) + "</span>";
+  }
+  var starSvg = '<svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/></svg>';
+  var arrowSvg = '<svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg>';
+
+  // ---------- featured ----------
+  var featured = [
+    { name: "SPK-penyakit-balita", lang: "PHP", stars: 10, badge: "⭐ Terpopuler",
+      desc: "Sistem pendukung keputusan untuk mendeteksi penyakit balita menggunakan metode forward chaining." },
+    { name: "Viola-Jones-Algoritm", lang: "Python", badge: "From scratch",
+      desc: "Implementasi algoritma deteksi wajah Viola-Jones yang ditulis dari nol dengan Python." },
+    { name: "Darknet", lang: "C", stars: 1,
+      desc: "Eksperimen dengan framework neural network Darknet untuk deteksi objek." },
+    { name: "sistem-informasi-alumni", lang: "JavaScript", stars: 2,
+      desc: "Sistem informasi alumni berbasis PHP dengan framework CodeIgniter dan database MySQL." },
+    { name: "ocr-plate-number", lang: "Python",
+      desc: "Pengenalan karakter pada plat nomor kendaraan dengan computer vision." },
+    { name: "Python-OpenCV-webcam-capture", lang: "Python", stars: 1,
+      desc: "Aplikasi desktop untuk menangkap gambar dari webcam menggunakan OpenCV dan Tkinter." }
+  ];
+  document.getElementById("featured").innerHTML = featured.map(function (p) {
+    return '<a class="card proj reveal" href="https://github.com/' + USER + "/" + p.name + '" target="_blank" rel="noopener">' +
+      '<div class="proj-top"><h3>' + escapeHtml(p.name) + "</h3>" + arrowSvg + "</div>" +
+      "<p>" + escapeHtml(p.desc) + "</p>" +
+      '<div class="proj-foot">' + langHtml(p.lang) +
+      (p.stars ? '<span class="lang">' + starSvg + p.stars + "</span>" : "") +
+      (p.badge ? '<span class="badge">' + escapeHtml(p.badge) + "</span>" : "") +
+      "</div></a>";
+  }).join("");
+
+  // ---------- reveal on scroll ----------
+  function observe() {
+    var els = document.querySelectorAll(".reveal:not(.in)");
+    if (!("IntersectionObserver" in window)) { els.forEach(function (e) { e.classList.add("in"); }); return; }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); } });
+    }, { threshold: 0.12 });
+    els.forEach(function (e) { io.observe(e); });
+  }
+  observe();
+
+  // ---------- live repos ----------
+  var all = [], lang = "Semua", showForks = false;
+  var reposEl = document.getElementById("repos"), filtersEl = document.getElementById("filters");
+
+  function render() {
+    var list = all.filter(function (r) {
+      return r.name.toLowerCase() !== (USER + ".github.io").toLowerCase() &&
+        (showForks || !r.fork) && (lang === "Semua" || r.language === lang);
+    });
+    reposEl.innerHTML = list.length ? list.map(function (r) {
+      return '<a class="card proj repo" href="' + r.html_url + '" target="_blank" rel="noopener">' +
+        '<div class="proj-top"><h3>' + escapeHtml(r.name) + "</h3>" + (r.fork ? '<span class="badge">fork</span>' : arrowSvg) + "</div>" +
+        "<p>" + (r.description ? escapeHtml(r.description) : '<span style="opacity:.6">Tanpa deskripsi</span>') + "</p>" +
+        '<div class="proj-foot">' + langHtml(r.language) +
+        (r.stargazers_count ? '<span class="lang">' + starSvg + r.stargazers_count + "</span>" : "") +
+        "<span>" + new Date(r.updated_at).toLocaleDateString("id-ID", { year: "numeric", month: "short" }) + "</span>" +
+        "</div></a>";
+    }).join("") : '<p class="note">Tidak ada repositori untuk filter ini.</p>';
+  }
+
+  function buildFilters() {
+    var counts = {};
+    all.forEach(function (r) { if (r.language && (showForks || !r.fork)) counts[r.language] = (counts[r.language] || 0) + 1; });
+    var langs = Object.keys(counts).sort(function (a, b) { return counts[b] - counts[a]; });
+    if (lang !== "Semua" && !counts[lang]) lang = "Semua";
+    filtersEl.innerHTML = ["Semua"].concat(langs).map(function (l) {
+      return '<button class="chip' + (l === lang ? " on" : "") + '" data-l="' + escapeHtml(l) + '">' + escapeHtml(l) + (counts[l] ? " · " + counts[l] : "") + "</button>";
+    }).join("") + '<label class="toggle"><input type="checkbox" id="forkT"' + (showForks ? " checked" : "") + "> Tampilkan fork</label>";
+    filtersEl.querySelectorAll(".chip").forEach(function (b) {
+      b.onclick = function () { lang = b.getAttribute("data-l"); buildFilters(); render(); };
+    });
+    document.getElementById("forkT").onchange = function (e) { showForks = e.target.checked; buildFilters(); render(); };
+  }
+
+  fetch("https://api.github.com/users/" + USER + "/repos?per_page=100&sort=updated")
+    .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function (data) {
+      all = data;
+      var own = data.filter(function (r) { return !r.fork; });
+      var stars = data.reduce(function (s, r) { return s + r.stargazers_count; }, 0);
+      var langs = {}; data.forEach(function (r) { if (r.language) langs[r.language] = 1; });
+      document.getElementById("sRepos").textContent = data.length;
+      document.getElementById("sStars").textContent = stars;
+      document.getElementById("sLangs").textContent = Object.keys(langs).length;
+      document.getElementById("repoNote").textContent =
+        own.length + " repositori milik sendiri dan " + (data.length - own.length) + " fork — diambil langsung dari GitHub.";
+      buildFilters(); render();
+    })
+    .catch(function () {
+      filtersEl.innerHTML = "";
+      reposEl.innerHTML = '<p class="note">Gagal memuat dari GitHub API (mungkin terkena batas rate). ' +
+        '<a href="https://github.com/' + USER + '?tab=repositories" target="_blank" rel="noopener">Lihat semua repositori di GitHub →</a></p>';
+    });
+})();
+</script>
+</body>
+</html>
